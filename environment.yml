@@ -1,0 +1,7 @@
+name: codefor
+
+dependencies:
+  - BeautifulSoup4
+  - cachetools
+  - jupyter
+  - selenium
