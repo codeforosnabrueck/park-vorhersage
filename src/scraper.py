@@ -128,10 +128,12 @@ def get_general_info(driver, *, url=None):
         ramp_data['free_capacity'] = free_capacity
         ramp_data['total_capacity'] = total_capacity
 
+        del ramp_data['gmapsMarker']
+
     return parking_ramps
 
 
-def main(url):
+def scrape(url):
     with get_webdriver() as driver:
         return get_general_info(driver=driver, url=url)
 
@@ -149,4 +151,4 @@ def get_webdriver():
 
 if __name__ == '__main__':
     url = r'https://www.parken-osnabrueck.de/'
-    main(url)
+    scrape(url)
