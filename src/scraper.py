@@ -90,7 +90,7 @@ def get_details(driver, *, url=None):
     # Get handle to send shortcut which closes current tab
     driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 'w')
 
-    return map(int, (free_capacity, total_capacity))
+    return int(free_capacity), int(total_capacity)
 
 
 @eval_robots_txt(AGENT_NAME)
