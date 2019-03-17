@@ -97,6 +97,7 @@ def get_details(driver, *, url=None):
 def get_general_info(driver, *, url=None):
     driver.get(url)
     wait_for_ajax(driver)
+    # wait_for_ajax` function might not work as expected, add extra sleep
     time.sleep(1)
 
     page_source = driver.page_source
