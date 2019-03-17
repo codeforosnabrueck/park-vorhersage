@@ -77,6 +77,7 @@ def wait_for_ajax(driver):
 
 @eval_robots_txt(AGENT_NAME)
 def get_details(driver, *, url=None):
+    # Get handle to send shortcut which opens new tab
     driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 't')
     driver.get(url)
     wait_for_ajax(driver)
@@ -86,6 +87,7 @@ def get_details(driver, *, url=None):
 
     logger.info((f'{free_capacity} von {total_capacity} frei.'))
 
+    # Get handle to send shortcut which closes current tab
     driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 'w')
 
     return map(int, (free_capacity, total_capacity))
