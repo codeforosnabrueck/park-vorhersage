@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Created on 16.01.2019
+
+@author: wagnerpeer
+
+Module is used to extract general information about parking ramps and details
+about their capacity from the official OPG website:
+https://www.parken-osnabrueck.de/
+"""
 from contextlib import contextmanager
 import functools
 import html
@@ -9,6 +19,7 @@ import time
 from urllib import robotparser
 
 from bs4 import BeautifulSoup
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox.options import Options
