@@ -1,6 +1,7 @@
 from contextlib import contextmanager
 import functools
 import html
+import json
 import logging
 import logging.config
 import re
@@ -101,7 +102,7 @@ def get_general_info(driver, *, url=None):
     parking_ramps = re.search(pattern='var parkingRampData = (\{.*\});',
                               string=page_source)
 
-    parking_ramps = eval(html.unescape(parking_ramps.group(1)))
+    parking_ramps = json.loads(html.unescape(parking_ramps.group(1)))
 
     for identifier, ramp_data in parking_ramps.items():
         logger.info(f'Parking Ramp Name: {ramp_data["name"]}')
