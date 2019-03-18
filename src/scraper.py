@@ -13,7 +13,6 @@ import functools
 import html
 import json
 import logging
-import logging.config
 import re
 import time
 from urllib import robotparser
@@ -28,35 +27,6 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
 
 AGENT_NAME = 'codeforosnabrueckbot'
-
-
-LOGGING_CONFIGURATION = {
-    'version': 1,
-    'formatters': {
-        'default': {
-            'format': '%(asctime)s %(levelname)-8s %(name)-15s %(message)s',
-            'datefmt': '%Y-%m-%d %H:%M:%S',
-        }
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'level': 'INFO',
-            'formatter': 'default',
-            'stream': 'ext://sys.stdout',
-        }
-    },
-    'loggers': {
-        'opg_scraper': {
-            'level': 'INFO',
-            'propagate': True,
-            'handlers': ['console'],
-        }
-    }
-}
-
-
-logging.config.dictConfig(LOGGING_CONFIGURATION)
 
 
 logger = logging.getLogger('opg_scraper.' + __name__)
@@ -147,8 +117,3 @@ def get_webdriver():
     yield driver
     driver.close()
     driver.quit()
-
-
-if __name__ == '__main__':
-    url = r'https://www.parken-osnabrueck.de/'
-    scrape(url)

@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+"""
+Created on 16.03.2019
+
+@author: wagnerpeer
+
+Define basic logging format and the sqlalchemy session to be used throughout
+the package.
+"""
 import logging
 import logging.config
 
