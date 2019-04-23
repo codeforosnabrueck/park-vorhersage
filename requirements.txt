@@ -1,0 +1,4 @@
+BeautifulSoup4
+jupyter
+requests
+sqlalchemy
