@@ -5,3 +5,4 @@ dependencies:
   - cachetools
   - jupyter
   - selenium
+  - sqlalchemy
