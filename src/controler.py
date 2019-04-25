@@ -19,8 +19,7 @@ def create():
 
 
 def scrape_website():
-    url = r'https://www.parken-osnabrueck.de/'
-    return scrape(url)
+    return scrape()
 
 
 def _create_or_retrieve_objects(tstamp=None,
