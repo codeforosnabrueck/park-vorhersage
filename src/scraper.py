@@ -7,6 +7,7 @@ Module is used to extract general information about parking ramps and details
 about their capacity from the official OPG website:
 https://www.parken-osnabrueck.de/
 """
+import datetime
 import html
 import json
 import logging
@@ -65,8 +66,9 @@ def get_general_info():
 
         logger.info((f'{details["available"]} von {details["capacity"]} frei.'))
 
-        ramp_data['free_capacity'] = details['available']
-        ramp_data['total_capacity'] = details['capacity']
+        ramp_data['utilization'] = {'free_capacity': details['available'],
+                                    'total_capacity': details['capacity'],
+                                    'access_time': datetime.datetime.now()}
 
         del ramp_data['gmapsMarker']
 

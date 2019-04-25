@@ -43,9 +43,7 @@ def store_data(data):
     session = Session()
 
     for ramp in data.values():
-        capacity = Capacity(tstamp=ramp.pop('tstamp'),
-                            free_capacity=ramp.pop('free_capacity'),
-                            total_capacity=ramp.pop('total_capacity'))
+        capacity = Capacity(**ramp.pop('utilization'))
 
         parking_ramp = session.query(ParkingRamp).get(ramp['identifier'])
 
