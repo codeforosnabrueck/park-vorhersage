@@ -25,13 +25,14 @@ class ParkingRamp(Base):
     latitude = Column(String)
     longitude = Column(String)
     address = Column(String)
+    tstamp = Column(Integer)
 
 
 class Capacity(Base):
     __tablename__ = 'capacities'
 
     identifier = Column(Integer, primary_key=True)
-    tstamp = Column(Integer)
+    access_time = Column(Integer)
     free_capacity = Column(Integer)
     total_capacity = Column(Integer)
     parking_ramp_identifier = Column(Integer,

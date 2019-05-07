@@ -7,6 +7,7 @@ Module is used to extract general information about parking ramps and details
 about their capacity from the official OPG website:
 https://www.parken-osnabrueck.de/
 """
+import datetime
 import html
 import json
 import logging
@@ -30,8 +31,8 @@ def raise_for_robots_txt(url, agent_name=AGENT_NAME):
     parser.read()
 
     if not parser.can_fetch(agent_name, url):
-        raise PermissionError(f'The robots.txt permitts the crawling of the '
-                              'site {url}')
+        raise PermissionError('The robots.txt permitts the crawling of the '
+                              'site {}'.format(url))
 
 
 def get_details(url=None):
@@ -59,14 +60,15 @@ def get_general_info():
     utilization = get_details(r'https://www.parken-osnabrueck.de/index.php?type=427590&tx_tiopgparkhaeuserosnabrueck_parkingosnabruek[controller]=Parking&tx_tiopgparkhaeuserosnabrueck_parkingosnabruek[action]=ajaxCallGetUtilizationData&_=1556046149040')
 
     for identifier, ramp_data in parking_ramps.items():
-        logger.info(f'Parking Ramp Name: {ramp_data["name"]}')
+        logger.info('Parking Ramp Name: {}'.format(ramp_data['name']))
 
         details = utilization['ramp-' + identifier]
 
-        logger.info((f'{details["available"]} von {details["capacity"]} frei.'))
+        logger.info(('{available} von {capacity} frei.').format(**details))
 
-        ramp_data['free_capacity'] = details['available']
-        ramp_data['total_capacity'] = details['capacity']
+        ramp_data['utilization'] = {'free_capacity': details['available'],
+                                    'total_capacity': details['capacity'],
+                                    'access_time': datetime.datetime.now()}
 
         del ramp_data['gmapsMarker']
 
