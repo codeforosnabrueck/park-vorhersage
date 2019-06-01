@@ -17,10 +17,14 @@ from urllib import robotparser
 
 from bs4 import BeautifulSoup
 
+import pytz
+
 import requests
 
 
 AGENT_NAME = 'codeforosnabrueckbot'
+
+TIMEZONE_OSNABRUECK = pytz.timezone('Europe/Berlin')
 
 
 logger = logging.getLogger('opg_scraper.' + __name__)
@@ -39,6 +43,8 @@ def get_details(url=None):
     response = requests.get(url)
     response.raise_for_status()
     utilization = json.loads(response.content.decode(response.encoding))
+
+    utilization['access_time'] = datetime.datetime.now(tz=TIMEZONE_OSNABRUECK)
 
     return utilization
 
@@ -68,7 +74,7 @@ def get_general_info():
 
         ramp_data['utilization'] = {'free_capacity': details['available'],
                                     'total_capacity': details['capacity'],
-                                    'access_time': datetime.datetime.now()}
+                                    'access_time': utilization['access_time']}
 
         del ramp_data['gmapsMarker']
 
