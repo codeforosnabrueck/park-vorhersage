@@ -1,4 +1,4 @@
 BeautifulSoup4
-jupyter
+pytz
 requests
 sqlalchemy
