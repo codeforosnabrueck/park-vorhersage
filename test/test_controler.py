@@ -2,7 +2,7 @@ import os.path
 import sys
 sys.path.append(os.path.abspath(os.getcwd()))
 
-from src import controler
+from park_vorhersage import controler
 
 
 if __name__ == "__main__":
