@@ -58,7 +58,13 @@ def raise_for_status(response):
         )
 
     if http_error_msg:
-        raise error.HTTPError(http_error_msg, response=response)
+        raise error.HTTPError(
+            url=response.geturl(),
+            code=response.getcode(),
+            msg=http_error_msg,
+            hdrs=response.info(),
+            fp=None,
+        )
 
 
 def raise_for_robots_txt(url, agent_name=AGENT_NAME):
