@@ -6,13 +6,19 @@ Created on 16.03.2019
 Define basic logging format and the sqlalchemy session to be used throughout
 the package.
 """
+__all__ = []
+
 import logging
 import logging.config
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from . import controler
+from .controler import *
+from . import storage
+from .storage import *
 
-__all__ = ["Session"]
+__all__ += controler.__all__
+__all__ += storage.__all__
+
 
 LOGGING_CONFIGURATION = {
     "version": 1,
@@ -36,9 +42,3 @@ LOGGING_CONFIGURATION = {
 }
 
 logging.config.dictConfig(LOGGING_CONFIGURATION)
-
-_engine = create_engine("sqlite:///opg.db", echo=True)
-
-Session = sessionmaker(bind=_engine)
-
-from .controler import *

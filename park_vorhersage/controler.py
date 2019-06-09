@@ -9,10 +9,7 @@ It can also be used to create the database from the schema definition.
 """
 __all__ = ["init", "scrape_and_store"]
 
-
-from . import Session
-
-from .storage import Base, Capacity, ParkingRamp, store
+from .storage import Base, Session, store
 from .scraper import scrape
 
 
