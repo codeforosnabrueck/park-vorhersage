@@ -10,12 +10,13 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
+from . import Session
 
 Base = declarative_base()
 
 
 class ParkingRamp(Base):
-    __tablename__ = 'parking_ramps'
+    __tablename__ = "parking_ramps"
 
     identifier = Column(Integer, primary_key=True)
     name = Column(String)
@@ -29,18 +30,34 @@ class ParkingRamp(Base):
 
 
 class Capacity(Base):
-    __tablename__ = 'capacities'
+    __tablename__ = "capacities"
 
     identifier = Column(Integer, primary_key=True)
     access_time = Column(Integer)
     free_capacity = Column(Integer)
     total_capacity = Column(Integer)
-    parking_ramp_identifier = Column(Integer,
-                                     ForeignKey('parking_ramps.identifier'))
+    parking_ramp_identifier = Column(Integer, ForeignKey("parking_ramps.identifier"))
 
-    parking_ramp = relationship('ParkingRamp', back_populates='capacities')
+    parking_ramp = relationship("ParkingRamp", back_populates="capacities")
 
 
-ParkingRamp.capacities = relationship('Capacity',
-                                      order_by=Capacity.identifier,
-                                      back_populates='parking_ramp')
+ParkingRamp.capacities = relationship(
+    "Capacity", order_by=Capacity.identifier, back_populates="parking_ramp"
+)
+
+
+def store(data):
+    session = Session()
+
+    for ramp in data.values():
+        capacity = Capacity(**ramp.pop("utilization"))
+
+        parking_ramp = session.query(ParkingRamp).get(ramp["identifier"])
+
+        if parking_ramp is None:
+            parking_ramp = ParkingRamp(**ramp)
+            session.add(parking_ramp)
+
+        parking_ramp.capacities.append(capacity)
+
+    session.commit()
