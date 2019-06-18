@@ -1,4 +1,2 @@
-BeautifulSoup4
 pytz
-requests
 sqlalchemy

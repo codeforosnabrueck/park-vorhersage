@@ -1,7 +1,5 @@
 name: codefor
 
 dependencies:
-  - BeautifulSoup4
   - pytz
-  - requests
   - sqlalchemy
