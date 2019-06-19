@@ -4,6 +4,19 @@ Dies ist ein Repository, um die Parkhaus-/Parkplatzdaten der Osnabücker
 Parkstätten Betriebsgesellschaft (OPG) zu analysieren.
 
 
+## Project Status
+
+**Versions**
+![Python3.7](https://img.shields.io/badge/python-3.5+-informational.svg "Python3.7")
+
+**Build Status**
+Travis: [![Travis Build Status](https://travis-ci.com/wagnerpeer/park-vorhersage.svg?branch=master)](https://travis-ci.com/wagnerpeer/park-vorhersage "Travis Build Status")
+AppVeyor: [![Build status](https://ci.appveyor.com/api/projects/status/tu78q6u0iot5twj5?svg=true)](https://ci.appveyor.com/project/wagnerpeer/park-vorhersage "AppVeyor Build Status")
+
+
+**Binder**
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/wagnerpeer/park-vorhersage/master)
+
 ## Usage
 
 Wenn ihr das Paket benutzen möchtet, müsst ihr Folgendes tun:

@@ -6,11 +6,18 @@ Created on 16.03.2019
 Module is used to define a database schema to hold general parking ramp
 information and details about their capacity using sqlalchemy.
 """
+__all__ = ["Capacity", "ParkingRamp", "Session"]
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
-from . import Session
+_ENGINE = create_engine("sqlite:///opg.db", echo=True)
+
+Session = sessionmaker(bind=_ENGINE)
 
 Base = declarative_base()
 
